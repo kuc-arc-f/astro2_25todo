@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LibCrud from '../../lib/LibCrud';
+
+export type Post = {
+  id: number;
+  name: string;
+};
+//
+//const items: Post[]  = await LibCrud.getList();
+//console.log(items);
+---
+
+<Layout title="Welcome to Astro.">
+    <main class="container">
+        <a href={`/todo`}>[ Back ]</a>
+        <hr />		
+        <h1>Create</h1>
+        <p class="instructions">
+        </p>
+        <hr />
+        <div class="row">
+            <div className="col-md-6 form-group">
+                <label for="title">タイトル</label>
+                <input type="text" id="title" name="title"
+                class="form-control" required>
+            </div>
+            <hr className="mt-2 mb-2" />
+            <div className="col-md-6 form-group">
+                <label for="content">内容</label>
+                <textarea id="content" name="content" required class="form-control"
+                rows="10" placeholder="markdown input, please"></textarea>
+            </div>
+            <hr className="mt-2 mb-2" />
+            <div>
+                <label for="completed">完了フラグ</label>
+                <input type="checkbox" id="completed" name="completed" value="1">
+            </div>
+        </div>	
+        <hr />
+        <button id="btn_save" class="btn btn-primary">Save
+        </button>
+    </main>
+</Layout>
+<!-- -->
+<style>
+</style>
+<!-- -->
+<script src="./CrudCreate.ts"></script>
+
+<!--
+ -->

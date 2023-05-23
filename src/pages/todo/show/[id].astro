@@ -1,0 +1,43 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import LibCrud from '../../../lib/LibCrud';
+//import { marked } from 'marked';
+//
+const { id } = Astro.params;
+console.log(id);
+let item: any = await LibCrud.get(Number(id));
+//console.log(item.content);
+
+---
+
+<!-- -->
+<style>
+</style>
+
+<!-- MarkUp -->
+<Layout title="Welcome to Astro.">
+    <main class="container">
+        <a class="btn btn-outline-primary" href={`/todo`}>Back</a>
+        <hr />		
+        <h1>{item.title}</h1>
+        <hr />
+        <p>Id:{id}</p>
+        <!--
+        <p>内容: {item.content}</p>
+        -->
+        <hr />
+        <div id="post_item">
+        </div>		
+        <hr />
+        <p>完了: {item.completed ? "完了" : "未完了"}</p>
+        <hr />
+        <input type="hidden" value={id} id="item_id" />
+        <input type="hidden" value={item.content} id="item_content" />
+        <button id="btn_delete" class="btn btn-danger">Delete</button>
+    </main>
+</Layout>
+<!-- -->
+<script src="../CrudShow.ts"></script>
+
+<!--
+ -->
