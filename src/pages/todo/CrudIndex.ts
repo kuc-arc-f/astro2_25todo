@@ -1,6 +1,7 @@
 import LibCrud from '../../lib/LibCrud';
 import LibConfig from '../../lib/LibConfig';
 import HttpCommon from '../../lib/HttpCommon';
+import LibCookie from '../../lib/LibCookie';
 //
 const CrudIndex = {
   /**
@@ -12,7 +13,16 @@ const CrudIndex = {
   getList :async function (): Promise<any>
   {
     try{
-      const json = await HttpCommon.server_post({}, "/todos/get_list");
+      const key = LibConfig.COOKIE_KEY_AUTH;
+      const auth = LibCookie.get_cookie(key);
+      if(!auth) {
+        throw new Error('Error , addItem cookie nothing.');
+      }
+      const postItem = {
+        userId: auth
+      }
+console.log(postItem); 
+      const json = await HttpCommon.server_post(postItem, "/todos/get_list");
 console.log(json);      
       let items: any[] = [];
       items = json.data;
