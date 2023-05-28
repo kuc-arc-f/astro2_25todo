@@ -14,7 +14,12 @@ const Layout = {
 //console.log("#Layout.startProc");
     let ret = false;
     const parsedUrl = new URL(window.location.href);
-    if(!(parsedUrl.pathname === '/login' || parsedUrl.pathname === '/basic_login')) 
+    if(
+      !(parsedUrl.pathname === '/login' ||
+       parsedUrl.pathname === '/basic_login' ||
+       parsedUrl.pathname === '/user/create'
+       )
+    )
     {
 console.log("pathname=", parsedUrl.pathname);
       const key = LibConfig.COOKIE_KEY_AUTH;
@@ -22,7 +27,7 @@ console.log("key=", key);
       const auth = LibCookie.get_cookie(key);
       if(typeof auth === "undefined" || auth === null)
       {
-        location.href = '/basic_login';
+        location.href = '/login';
       }
       console.log(key, auth);      
     }

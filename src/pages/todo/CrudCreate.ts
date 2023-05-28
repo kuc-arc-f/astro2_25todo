@@ -1,6 +1,7 @@
 import LibConfig from '../../lib/LibConfig';
 import Crud from './Crud';
 import HttpCommon from '../../lib/HttpCommon';
+import LibCookie from '../../lib/LibCookie';
 //
 const CrudCreate = {
 
@@ -15,6 +16,13 @@ const CrudCreate = {
     try{
       let ret = false;
       let values = Crud.getInputValues();
+      const key = LibConfig.COOKIE_KEY_AUTH;
+      const auth = LibCookie.get_cookie(key);
+      if(!auth) {
+        throw new Error('Error , addItem cookie nothing.');
+      }
+      values.userId = auth;
+//console.log("auth=", auth);
 //console.log(values);
       const json = await HttpCommon.server_post(values, '/todos/create');
 console.log(json);
